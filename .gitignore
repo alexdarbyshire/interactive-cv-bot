@@ -41,3 +41,10 @@ yarn-error.log*
 /playwright-report/
 /blob-report/
 /playwright/*
+
+
+#VSCode dev config
+.vscode/launch.json
+
+#Working Prompt file
+REGULAR_PROMPT.txt

@@ -32,8 +32,30 @@ This is a guide for using artifacts tools: \`createDocument\` and \`updateDocume
 Do not update document right after creating it. Wait for user feedback or request to update it.
 `;
 
-export const regularPrompt =
-  'You are a friendly assistant! Keep your responses concise and helpful.';
+// Default fallback prompt if OPENING_PROMPT_BASE64 is not provided
+const defaultPrompt =
+  'You are a helpful AI assistant. Keep your responses concise and helpful.';
+
+// Function to get the opening prompt from environment variable or fallback
+function getOpeningPrompt(): string {
+  const base64Prompt = process.env.OPENING_PROMPT_BASE64;
+
+  if (base64Prompt) {
+    try {
+      return Buffer.from(base64Prompt, 'base64').toString('utf-8');
+    } catch (error) {
+      console.warn(
+        'Failed to decode OPENING_PROMPT_BASE64, using default prompt:',
+        error,
+      );
+      return defaultPrompt;
+    }
+  }
+
+  return defaultPrompt;
+}
+
+export const regularPrompt = getOpeningPrompt();
 
 export interface RequestHints {
   latitude: Geo['latitude'];
