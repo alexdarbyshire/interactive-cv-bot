@@ -13,7 +13,7 @@ export const Greeting = () => {
         transition={{ delay: 0.5 }}
         className="text-2xl font-semibold"
       >
-        Welcome to Alex Darbyshire's Interactive CV
+        Welcome to Alex Darbyshire&apos;s Interactive CV
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -22,9 +22,9 @@ export const Greeting = () => {
         transition={{ delay: 0.6 }}
         className="text-lg text-zinc-500 max-w-2xl"
       >
-        Ask me about Alex's experience, or let me create a tailored 'course of
-        life' (<em>curriculum vitae</em>), or we could do a <em>résumé</em> if
-        you prefer the French.
+        Ask me about Alex&apos;s experience, or let me create a tailored
+        &apos;course of life&apos; (<em>curriculum vitae</em>), or we could do a{' '}
+        <em>résumé</em> if you prefer the French.
       </motion.div>
     </div>
   );

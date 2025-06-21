@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -25,7 +25,7 @@ export function ResumeTemplate({
     return (
       <div className="w-full h-96 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full size-8 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Generating resume...</p>
         </div>
       </div>
@@ -45,9 +45,9 @@ export function ResumeTemplate({
             className="flex items-center gap-2"
           >
             {showPreview ? (
-              <EyeOff className="h-4 w-4" />
+              <EyeOff className="size-4" />
             ) : (
-              <Eye className="h-4 w-4" />
+              <Eye className="size-4" />
             )}
             {showPreview ? 'Hide Preview' : 'Show Preview'}
           </Button>
@@ -62,7 +62,7 @@ export function ResumeTemplate({
                 className="flex items-center gap-2"
                 size="sm"
               >
-                <Download className="h-4 w-4" />
+                <Download className="size-4" />
                 {loading ? 'Preparing...' : 'Download PDF'}
               </Button>
             )}
@@ -137,9 +137,9 @@ export function ResumeTemplate({
             <div>
               <p className="font-medium text-muted-foreground mb-2">Skills</p>
               <div className="flex flex-wrap gap-2">
-                {data.skills.map((skillCategory, index) => (
+                {data.skills.map((skillCategory) => (
                   <span
-                    key={index}
+                    key={skillCategory.category}
                     className="inline-flex items-center px-2 py-1 rounded-md bg-secondary text-secondary-foreground text-xs"
                   >
                     {skillCategory.category}
@@ -186,7 +186,7 @@ export function ResumeTemplateErrorBoundary({
 }) {
   const [hasError, setHasError] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleError = () => setHasError(true);
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError);
