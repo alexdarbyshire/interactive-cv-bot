@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://chat.vercel.ai'),
   title: 'Interactive CV Bot - Terminal',
   description: 'Terminal-themed interactive CV chatbot using AI SDK.',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export const viewport = {
