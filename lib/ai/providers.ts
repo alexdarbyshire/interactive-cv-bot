@@ -3,7 +3,7 @@ import {
   extractReasoningMiddleware,
   wrapLanguageModel,
 } from 'ai';
-import { xai } from '@ai-sdk/xai';
+import { openrouter } from '@openrouter/ai-sdk-provider';
 import { isTestEnvironment } from '../constants';
 import {
   artifactModel,
@@ -23,15 +23,14 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-2-vision-1212'),
+        'chat-model': openrouter('anthropic/claude-sonnet-4'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: xai('grok-3-mini-beta'),
+          model: openrouter('anthropic/claude-sonnet-4'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': xai('grok-2-1212'),
-        'artifact-model': xai('grok-2-1212'),
+        'title-model': openrouter('anthropic/claude-sonnet-4'),
+        'artifact-model': openrouter('anthropic/claude-sonnet-4'),
       },
-      imageModels: {
-        'small-model': xai.image('grok-2-image'),
-      },
+      // Note: OpenRouter doesn't support image models in the same way as xAI
+      // Image generation functionality will need to be handled separately
     });

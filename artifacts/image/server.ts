@@ -5,39 +5,27 @@ import { experimental_generateImage } from 'ai';
 export const imageDocumentHandler = createDocumentHandler<'image'>({
   kind: 'image',
   onCreateDocument: async ({ title, dataStream }) => {
-    let draftContent = '';
-
-    const { image } = await experimental_generateImage({
-      model: myProvider.imageModel('small-model'),
-      prompt: title,
-      n: 1,
-    });
-
-    draftContent = image.base64;
+    // TODO: Implement image generation with OpenRouter or alternative provider
+    // For now, return a placeholder message
+    const placeholderMessage = `Image generation temporarily unavailable. Requested: "${title}"`;
 
     dataStream.writeData({
       type: 'image-delta',
-      content: image.base64,
+      content: btoa(placeholderMessage), // Base64 encode the placeholder
     });
 
-    return draftContent;
+    return btoa(placeholderMessage);
   },
   onUpdateDocument: async ({ description, dataStream }) => {
-    let draftContent = '';
-
-    const { image } = await experimental_generateImage({
-      model: myProvider.imageModel('small-model'),
-      prompt: description,
-      n: 1,
-    });
-
-    draftContent = image.base64;
+    // TODO: Implement image generation with OpenRouter or alternative provider
+    // For now, return a placeholder message
+    const placeholderMessage = `Image generation temporarily unavailable. Requested: "${description}"`;
 
     dataStream.writeData({
       type: 'image-delta',
-      content: image.base64,
+      content: btoa(placeholderMessage), // Base64 encode the placeholder
     });
 
-    return draftContent;
+    return btoa(placeholderMessage);
   },
 });
