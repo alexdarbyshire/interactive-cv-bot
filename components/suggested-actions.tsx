@@ -26,7 +26,7 @@ function PureSuggestedActions({
     {
       title: 'Generate a tailored CV',
       label: 'for a Technical Lead role',
-      action: 'Generate a tailored CV for a Techincal Lead role',
+      action: 'Generate a tailored CV for a Technical Lead role',
     },
     {
       title: "What's your experience with",
