@@ -13,16 +13,18 @@ export const Greeting = () => {
         transition={{ delay: 0.5 }}
         className="text-2xl font-semibold"
       >
-        Hello there!
+        Welcome to Alex Darbyshire's Interactive CV
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ delay: 0.6 }}
-        className="text-2xl text-zinc-500"
+        className="text-lg text-zinc-500 max-w-2xl"
       >
-        How can I help you today?
+        Ask me about Alex's experience, or let me create a tailored 'course of
+        life' (<em>curriculum vitae</em>), or we could do a <em>résumé</em> if
+        you prefer the French.
       </motion.div>
     </div>
   );
