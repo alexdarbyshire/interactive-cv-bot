@@ -33,7 +33,7 @@ function PureChatHeader({
   const { width: windowWidth } = useWindowSize();
 
   return (
-    <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2">
+    <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2 border-b border-border font-mono">
       <SidebarToggle />
 
       {(!open || windowWidth < 768) && (
@@ -41,7 +41,7 @@ function PureChatHeader({
           <TooltipTrigger asChild>
             <Button
               variant="outline"
-              className="order-2 md:order-1 md:px-2 px-2 md:h-fit ml-auto md:ml-0"
+              className="order-2 md:order-1 md:px-2 px-2 md:h-fit ml-auto md:ml-0 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-mono"
               onClick={() => {
                 router.push('/');
                 router.refresh();
@@ -51,7 +51,7 @@ function PureChatHeader({
               <span className="md:sr-only">New Chat</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent className="bg-background border-accent text-foreground font-mono">New Chat</TooltipContent>
         </Tooltip>
       )}
 
@@ -72,7 +72,7 @@ function PureChatHeader({
       )}
 
       <Button
-        className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-zinc-50 dark:text-zinc-900 hidden md:flex py-1.5 px-2 h-fit md:h-[34px] order-4 md:ml-auto"
+        className="bg-accent text-accent-foreground hover:bg-accent/80 hidden md:flex py-1.5 px-2 h-fit md:h-[34px] order-4 md:ml-auto font-mono border border-accent"
         asChild
       >
         <Link
@@ -80,7 +80,7 @@ function PureChatHeader({
           target="_noblank"
         >
           <VercelIcon size={16} />
-          Deploy with Vercel
+          Deploy Terminal CV
         </Link>
       </Button>
     </header>

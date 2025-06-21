@@ -1,19 +1,62 @@
+/* Fira Code: https://github.com/tonsky/FiraCode */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
-    }
+  /* Terminal Theme Variables - Based on alexdarbyshire.com */
+  --background: #1d2021;
+  --foreground: #ebdbb2;
+  --accent: #8ec07c;
+  --radius: 0;
+  --font-size: 1rem;
+  --line-height: 1.54em;
+  
+  /* Terminal Color Palette */
+  --terminal-background: #1d2021;
+  --terminal-foreground: #ebdbb2;
+  --terminal-accent: #8ec07c;
+  --terminal-muted: #504945;
+  --terminal-border: #3c3836;
+  --terminal-selection: #458588;
+  
+  /* Component Colors - Terminal Theme */
+  --card: #1d2021;
+  --card-foreground: #ebdbb2;
+  --popover: #1d2021;
+  --popover-foreground: #ebdbb2;
+  --primary: #8ec07c;
+  --primary-foreground: #1d2021;
+  --secondary: #504945;
+  --secondary-foreground: #ebdbb2;
+  --muted: #504945;
+  --muted-foreground: #a89984;
+  --accent: #8ec07c;
+  --accent-foreground: #1d2021;
+  --destructive: #fb4934;
+  --destructive-foreground: #ebdbb2;
+  --border: #3c3836;
+  --input: #3c3836;
+  --ring: #8ec07c;
+  
+  /* Chart Colors - Terminal Theme */
+  --chart-1: #8ec07c;
+  --chart-2: #83a598;
+  --chart-3: #d3869b;
+  --chart-4: #fabd2f;
+  --chart-5: #fe8019;
+  
+  /* Sidebar Colors - Terminal Theme */
+  --sidebar-background: #1d2021;
+  --sidebar-foreground: #ebdbb2;
+  --sidebar-primary: #8ec07c;
+  --sidebar-primary-foreground: #1d2021;
+  --sidebar-accent: #504945;
+  --sidebar-accent-foreground: #ebdbb2;
+  --sidebar-border: #3c3836;
+  --sidebar-ring: #8ec07c;
 }
 
 @layer utilities {
@@ -23,87 +66,170 @@
 }
 
 @layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 240 10% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 240 10% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 240 10% 3.9%;
-        --primary: 240 5.9% 10%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 240 4.8% 95.9%;
-        --secondary-foreground: 240 5.9% 10%;
-        --muted: 240 4.8% 95.9%;
-        --muted-foreground: 240 3.8% 46.1%;
-        --accent: 240 4.8% 95.9%;
-        --accent-foreground: 240 5.9% 10%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 240 5.9% 90%;
-        --input: 240 5.9% 90%;
-        --ring: 240 10% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.5rem;
-        --sidebar-background: 0 0% 98%;
-        --sidebar-foreground: 240 5.3% 26.1%;
-        --sidebar-primary: 240 5.9% 10%;
-        --sidebar-primary-foreground: 0 0% 98%;
-        --sidebar-accent: 240 4.8% 95.9%;
-        --sidebar-accent-foreground: 240 5.9% 10%;
-        --sidebar-border: 220 13% 91%;
-        --sidebar-ring: 217.2 91.2% 59.8%;
-    }
-    .dark {
-        --background: 240 10% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 240 10% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 240 10% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 240 5.9% 10%;
-        --secondary: 240 3.7% 15.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 240 3.7% 15.9%;
-        --muted-foreground: 240 5% 64.9%;
-        --accent: 240 3.7% 15.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 240 3.7% 15.9%;
-        --input: 240 3.7% 15.9%;
-        --ring: 240 4.9% 83.9%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
-        --sidebar-background: 240 5.9% 10%;
-        --sidebar-foreground: 240 4.8% 95.9%;
-        --sidebar-primary: 224.3 76.3% 48%;
-        --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 240 3.7% 15.9%;
-        --sidebar-accent-foreground: 240 4.8% 95.9%;
-        --sidebar-border: 240 3.7% 15.9%;
-        --sidebar-ring: 217.2 91.2% 59.8%;
-    }
-}
-
-@layer base {
     * {
         @apply border-border;
     }
 
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+        word-break: break-word;
+    }
+
     body {
-        @apply bg-background text-foreground;
+        margin: 0;
+        padding: 0;
+        font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace;
+        font-size: var(--font-size);
+        font-weight: 400;
+        line-height: var(--line-height);
+        background-color: var(--background);
+        color: var(--foreground);
+        text-rendering: optimizeLegibility;
+        font-variant-ligatures: contextual;
+        -webkit-overflow-scrolling: touch;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Terminal-style headings */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        letter-spacing: 0;
+        margin: 25px 0;
+    }
+
+    h1 {
+        font-size: calc(var(--font-size) * 1.45);
+    }
+
+    h2 {
+        font-size: calc(var(--font-size) * 1.35);
+    }
+
+    h3 {
+        font-size: calc(var(--font-size) * 1.15);
+    }
+
+    h4, h5, h6 {
+        font-size: calc(var(--font-size) * 1);
+    }
+
+    /* Terminal-style links */
+    a {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Terminal-style buttons */
+    button {
+        font-family: inherit;
+        font-weight: 600;
+    }
+
+    /* Terminal-style inputs */
+    input, textarea, select {
+        font-family: inherit;
+        background: transparent;
+        color: var(--foreground);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+    }
+
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+        border-color: var(--accent);
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    /* Terminal-style code blocks */
+    code, kbd {
+        font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
+        font-feature-settings: normal;
+        background: color-mix(in srgb, var(--foreground) 5%, transparent);
+        color: color-mix(in srgb, var(--foreground) 5%, var(--accent));
+        border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+        padding: 0 6px;
+        margin: 0 2px;
+        font-size: 0.95em;
+        border-radius: var(--radius);
+    }
+
+    pre {
+        tab-size: 4;
+        background: color-mix(in srgb, var(--foreground) 5%, transparent) !important;
+        color: color-mix(in srgb, var(--foreground) 5%, var(--accent));
+        padding: 20px 10px;
+        font-size: 0.95em !important;
+        overflow: auto;
+        border-radius: var(--radius);
+        border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+        font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
+    }
+
+    pre code {
+        background: none !important;
+        margin: 0;
+        padding: 0;
+        font-size: inherit;
+        border: none;
+    }
+
+    /* Terminal-style blockquotes */
+    blockquote {
+        position: relative;
+        border-top: 1px solid var(--accent);
+        border-bottom: 1px solid var(--accent);
+        margin: 25px 0;
+        padding: 25px;
+    }
+
+    blockquote::before {
+        content: ">";
+        display: block;
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+    }
+
+    /* Terminal-style selection */
+    ::selection {
+        background: var(--terminal-selection);
+        color: var(--foreground);
+    }
+
+    /* Terminal-style scrollbars */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--background);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: var(--radius);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
     }
 }
 
+/* Terminal-style skeleton loading */
 .skeleton {
     * {
         pointer-events: none !important;
@@ -111,54 +237,128 @@
 
     *[class^="text-"] {
         color: transparent;
-        @apply rounded-md bg-foreground/20 select-none animate-pulse;
+        background: var(--muted);
+        border-radius: var(--radius);
+        animation: terminal-blink 1.5s ease-in-out infinite;
     }
 
     .skeleton-bg {
-        @apply bg-foreground/10;
+        background: var(--muted);
     }
 
     .skeleton-div {
-        @apply bg-foreground/20 animate-pulse;
+        background: var(--muted);
+        animation: terminal-blink 1.5s ease-in-out infinite;
     }
 }
 
+/* Terminal-style ProseMirror editor */
 .ProseMirror {
     outline: none;
+    font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
+    background: var(--background);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: var(--radius);
 }
 
+/* Terminal-style CodeMirror */
 .cm-editor,
 .cm-gutters {
-    @apply bg-background dark:bg-zinc-800 outline-none selection:bg-zinc-900 !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+    outline: none;
+    font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.cm-editor .cm-content {
+    color: var(--foreground) !important;
 }
 
 .ͼo.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,
 .ͼo.cm-selectionBackground,
 .ͼo.cm-content::selection {
-    @apply bg-zinc-200 dark:bg-zinc-900 !important;
+    background: var(--terminal-selection) !important;
 }
 
 .cm-activeLine,
 .cm-activeLineGutter {
-    @apply bg-transparent !important;
-}
-
-.cm-activeLine {
-    @apply rounded-r-sm !important;
+    background: color-mix(in srgb, var(--accent) 10%, transparent) !important;
 }
 
 .cm-lineNumbers {
-    @apply min-w-7;
+    min-width: 28px;
+    color: var(--muted-foreground);
 }
 
 .cm-foldGutter {
-    @apply min-w-3;
+    min-width: 12px;
 }
 
 .cm-lineNumbers .cm-activeLineGutter {
-    @apply rounded-l-sm !important;
+    color: var(--accent);
 }
 
+/* Terminal-style suggestion highlighting */
 .suggestion-highlight {
-    @apply bg-blue-200 hover:bg-blue-300 dark:hover:bg-blue-400/50 dark:text-blue-50 dark:bg-blue-500/40;
+    background: color-mix(in srgb, var(--accent) 40%, transparent);
+    color: var(--foreground);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+}
+
+.suggestion-highlight:hover {
+    background: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+/* Terminal cursor animation */
+.terminal-cursor {
+    animation: terminal-blink 1s step-end infinite;
+}
+
+@keyframes terminal-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Terminal-style focus indicators */
+*:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Terminal-style disabled states */
+*:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Terminal-style tables */
+table {
+    border-collapse: collapse;
+    border: 2px solid var(--border);
+    font-family: inherit;
+}
+
+th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background: var(--muted);
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+/* Terminal-style hr */
+hr {
+    border: none;
+    height: 2px;
+    background: var(--accent);
+    margin: 25px 0;
 }
