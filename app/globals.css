@@ -6,21 +6,13 @@
 @tailwind utilities;
 
 :root {
-  /* Terminal Theme Variables - Based on alexdarbyshire.com */
+  /* Terminal Theme Variables - Simplified for mobile */
   --background: #1d2021;
   --foreground: #ebdbb2;
   --accent: #8ec07c;
   --radius: 0;
   --font-size: 1rem;
   --line-height: 1.54em;
-  
-  /* Terminal Color Palette */
-  --terminal-background: #1d2021;
-  --terminal-foreground: #ebdbb2;
-  --terminal-accent: #8ec07c;
-  --terminal-muted: #504945;
-  --terminal-border: #3c3836;
-  --terminal-selection: #458588;
   
   /* Component Colors - Terminal Theme */
   --card: #1d2021;
@@ -33,22 +25,13 @@
   --secondary-foreground: #ebdbb2;
   --muted: #504945;
   --muted-foreground: #a89984;
-  --accent: #8ec07c;
-  --accent-foreground: #1d2021;
   --destructive: #fb4934;
   --destructive-foreground: #ebdbb2;
   --border: #3c3836;
   --input: #3c3836;
   --ring: #8ec07c;
   
-  /* Chart Colors - Terminal Theme */
-  --chart-1: #8ec07c;
-  --chart-2: #83a598;
-  --chart-3: #d3869b;
-  --chart-4: #fabd2f;
-  --chart-5: #fe8019;
-  
-  /* Sidebar Colors - Terminal Theme */
+  /* Sidebar Colors */
   --sidebar-background: #1d2021;
   --sidebar-foreground: #ebdbb2;
   --sidebar-primary: #8ec07c;
@@ -59,306 +42,104 @@
   --sidebar-ring: #8ec07c;
 }
 
+/* Global responsive fixes */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 @layer utilities {
-    .text-balance {
-        text-wrap: balance;
-    }
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
 
-    html {
-        box-sizing: border-box;
-    }
+  /* Force responsive width handling */
+  .w-full {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 
-    *,
-    *::before,
-    *::after {
-        box-sizing: inherit;
-        word-break: break-word;
-    }
+  /* Fix for mobile overflow - ensure all containers respect parent width */
+  div, section, main, aside, form, textarea, input {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace;
-        font-size: var(--font-size);
-        font-weight: 400;
-        line-height: var(--line-height);
-        background-color: var(--background);
-        color: var(--foreground);
-        text-rendering: optimizeLegibility;
-        font-variant-ligatures: contextual;
-        -webkit-overflow-scrolling: touch;
-        -webkit-text-size-adjust: 100%;
-        -webkit-font-smoothing: antialiased;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace;
+    font-size: var(--font-size);
+    font-weight: 400;
+    line-height: var(--line-height);
+    background-color: var(--background);
+    color: var(--foreground);
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* Terminal-style headings */
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
-        letter-spacing: 0;
-        margin: 25px 0;
-    }
+  /* Simplified headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin: 1rem 0;
+  }
 
-    h1 {
-        font-size: calc(var(--font-size) * 1.45);
-    }
-
-    h2 {
-        font-size: calc(var(--font-size) * 1.35);
-    }
-
-    h3 {
-        font-size: calc(var(--font-size) * 1.15);
-    }
-
-    h4, h5, h6 {
-        font-size: calc(var(--font-size) * 1);
-    }
-
-    /* Terminal-style links */
-    a {
-        color: var(--accent);
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    /* Terminal-style buttons */
-    button {
-        font-family: inherit;
-        font-weight: 600;
-    }
-
-    /* Terminal-style inputs */
-    input, textarea, select {
-        font-family: inherit;
-        background: transparent;
-        color: var(--foreground);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-    }
-
-    input:focus-visible,
-    textarea:focus-visible,
-    select:focus-visible {
-        border-color: var(--accent);
-        outline: 1px solid var(--accent);
-        outline-offset: 2px;
-    }
-
-    /* Terminal-style code blocks */
-    code, kbd {
-        font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
-        font-feature-settings: normal;
-        background: color-mix(in srgb, var(--foreground) 5%, transparent);
-        color: color-mix(in srgb, var(--foreground) 5%, var(--accent));
-        border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
-        padding: 0 6px;
-        margin: 0 2px;
-        font-size: 0.95em;
-        border-radius: var(--radius);
-    }
-
-    pre {
-        tab-size: 4;
-        background: color-mix(in srgb, var(--foreground) 5%, transparent) !important;
-        color: color-mix(in srgb, var(--foreground) 5%, var(--accent));
-        padding: 20px 10px;
-        font-size: 0.95em !important;
-        overflow: auto;
-        border-radius: var(--radius);
-        border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
-        font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
-    }
-
-    pre code {
-        background: none !important;
-        margin: 0;
-        padding: 0;
-        font-size: inherit;
-        border: none;
-    }
-
-    /* Terminal-style blockquotes */
-    blockquote {
-        position: relative;
-        border-top: 1px solid var(--accent);
-        border-bottom: 1px solid var(--accent);
-        margin: 25px 0;
-        padding: 25px;
-    }
-
-    blockquote::before {
-        content: ">";
-        display: block;
-        position: absolute;
-        left: 0;
-        color: var(--accent);
-    }
-
-    /* Terminal-style selection */
-    ::selection {
-        background: var(--terminal-selection);
-        color: var(--foreground);
-    }
-
-    /* Terminal-style scrollbars */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: var(--background);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: var(--border);
-        border-radius: var(--radius);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--accent);
-    }
-}
-
-/* Terminal-style skeleton loading */
-.skeleton {
-    * {
-        pointer-events: none !important;
-    }
-
-    *[class^="text-"] {
-        color: transparent;
-        background: var(--muted);
-        border-radius: var(--radius);
-        animation: terminal-blink 1.5s ease-in-out infinite;
-    }
-
-    .skeleton-bg {
-        background: var(--muted);
-    }
-
-    .skeleton-div {
-        background: var(--muted);
-        animation: terminal-blink 1.5s ease-in-out infinite;
-    }
-}
-
-/* Terminal-style ProseMirror editor */
-.ProseMirror {
-    outline: none;
-    font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
-    background: var(--background);
+  /* Simplified inputs */
+  input, textarea, select {
+    width: 100%;
+    max-width: 100%;
+    font-family: inherit;
+    background: transparent;
     color: var(--foreground);
     border: 1px solid var(--border);
-    padding: 10px;
     border-radius: var(--radius);
-}
+  }
 
-/* Terminal-style CodeMirror */
-.cm-editor,
-.cm-gutters {
-    background: var(--background) !important;
-    color: var(--foreground) !important;
-    outline: none;
-    font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-}
-
-.cm-editor .cm-content {
-    color: var(--foreground) !important;
-}
-
-.ͼo.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,
-.ͼo.cm-selectionBackground,
-.ͼo.cm-content::selection {
-    background: var(--terminal-selection) !important;
-}
-
-.cm-activeLine,
-.cm-activeLineGutter {
-    background: color-mix(in srgb, var(--accent) 10%, transparent) !important;
-}
-
-.cm-lineNumbers {
-    min-width: 28px;
-    color: var(--muted-foreground);
-}
-
-.cm-foldGutter {
-    min-width: 12px;
-}
-
-.cm-lineNumbers .cm-activeLineGutter {
-    color: var(--accent);
-}
-
-/* Terminal-style suggestion highlighting */
-.suggestion-highlight {
-    background: color-mix(in srgb, var(--accent) 40%, transparent);
-    color: var(--foreground);
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-}
-
-.suggestion-highlight:hover {
-    background: color-mix(in srgb, var(--accent) 60%, transparent);
+  /* Simplified focus states - reduce complexity */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  *:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 1px;
+  }
 }
 
 /* Terminal cursor animation */
 .terminal-cursor {
-    animation: terminal-blink 1s step-end infinite;
+  animation: terminal-blink 1s step-end infinite;
 }
 
 @keyframes terminal-blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
-/* Terminal-style focus indicators */
-*:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-}
-
-/* Terminal-style disabled states */
-*:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Terminal-style tables */
-table {
-    border-collapse: collapse;
-    border: 2px solid var(--border);
-    font-family: inherit;
-}
-
-th, td {
-    border: 1px solid var(--border);
-    padding: 8px 12px;
-    text-align: left;
-}
-
-th {
-    background: var(--muted);
-    color: var(--foreground);
-    font-weight: 600;
-}
-
-/* Terminal-style hr */
-hr {
-    border: none;
-    height: 2px;
-    background: var(--accent);
-    margin: 25px 0;
+/* Media queries for responsive design */
+@media screen and (max-width: 480px) {
+  :root {
+    --font-size: 0.9rem;
+  }
+  
+  input, textarea, select, button {
+    padding: 0.25rem !important;
+  }
+  
+  /* Reduce padding on mobile */
+  .p-4 {
+    padding: 0.5rem !important;
+  }
+  
+  .px-4 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
 }
