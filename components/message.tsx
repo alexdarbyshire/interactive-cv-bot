@@ -183,6 +183,8 @@ const PurePreviewMessage = ({
                           args={args}
                           isReadonly={isReadonly}
                         />
+                      ) : toolName === 'generateResume' ? (
+                        <DocumentPreview isReadonly={isReadonly} args={args} />
                       ) : null}
                     </div>
                   );
@@ -211,6 +213,11 @@ const PurePreviewMessage = ({
                           type="request-suggestions"
                           result={result}
                           isReadonly={isReadonly}
+                        />
+                      ) : toolName === 'generateResume' ? (
+                        <DocumentPreview
+                          isReadonly={isReadonly}
+                          result={result}
                         />
                       ) : (
                         <pre>{JSON.stringify(result, null, 2)}</pre>

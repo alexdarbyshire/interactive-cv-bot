@@ -21,6 +21,8 @@ import { useArtifact } from '@/hooks/use-artifact';
 import equal from 'fast-deep-equal';
 import { SpreadsheetEditor } from './sheet-editor';
 import { ImageEditor } from './image-editor';
+import { ResumeTemplate } from './resume-template';
+import type { ResumeData } from '@/lib/resume/schema';
 
 interface DocumentPreviewProps {
   isReadonly: boolean;
@@ -279,6 +281,14 @@ const DocumentContent = ({ document }: { document: Document }) => {
           status={artifact.status}
           isInline={true}
         />
+      ) : document.kind === 'resume' ? (
+        <div className="p-4">
+          <ResumeTemplate
+            data={JSON.parse(document.content ?? '{}') as ResumeData}
+            title={document.title}
+            isLoading={artifact.status === 'streaming'}
+          />
+        </div>
       ) : null}
     </div>
   );

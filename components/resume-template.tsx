@@ -21,13 +21,19 @@ export function ResumeTemplate({
 }: ResumeTemplateProps) {
   const [showPreview, setShowPreview] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
+
+  const generatePdfBlob = async () => {
+    const doc = <StableProfessionalResume data={data} />;
+    const asPdf = pdf(doc);
+    return await asPdf.toBlob();
+  };
 
   const handleDownload = async () => {
     try {
       setIsDownloading(true);
-      const doc = <StableProfessionalResume data={data} />;
-      const asPdf = pdf(doc);
-      const blob = await asPdf.toBlob();
+      const blob = await generatePdfBlob();
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -42,6 +48,35 @@ export function ResumeTemplate({
       setIsDownloading(false);
     }
   };
+
+  const generatePreview = async () => {
+    if (!showPreview) return;
+    
+    try {
+      setIsGeneratingPreview(true);
+      const blob = await generatePdfBlob();
+      const url = URL.createObjectURL(blob);
+      setPreviewUrl(url);
+    } catch (error) {
+      console.error('Error generating PDF preview:', error);
+    } finally {
+      setIsGeneratingPreview(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showPreview) {
+      generatePreview();
+    }
+  }, [data, showPreview]);
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
   
 
   if (isLoading) {
@@ -87,16 +122,36 @@ export function ResumeTemplate({
         </div>
       </div>
 
-      {/* Resume Preview - Temporarily disabled due to react-pdf reconciler issues */}
+      {/* Resume Preview */}
       {showPreview && (
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Resume Preview</CardTitle>
           </CardHeader>
-          <CardContent className="p-8 text-center">
-            <div className="text-muted-foreground">
-              <p className="mb-4">PDF preview is temporarily disabled due to a technical issue.</p>
-              <p>You can still download the PDF using the button above.</p>
+          <CardContent className="p-0">
+            <div className="w-full h-[600px] border rounded-b-lg overflow-hidden">
+              {isGeneratingPreview ? (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full size-8 border-b-2 border-primary mx-auto mb-4" />
+                    <p className="text-muted-foreground">Generating preview...</p>
+                  </div>
+                </div>
+              ) : previewUrl ? (
+                <iframe
+                  src={previewUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 'none' }}
+                  title="Resume Preview"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center text-muted-foreground">
+                    <p>Unable to generate preview</p>
+                  </div>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

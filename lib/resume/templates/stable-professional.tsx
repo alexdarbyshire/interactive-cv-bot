@@ -192,23 +192,6 @@ export function StableProfessionalResume({ data }: StableProfessionalResumeProps
           </View>
         )}
 
-        {/* Education */}
-        {processedData.education.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Education</Text>
-            {processedData.education.map((edu, index) => (
-              <View key={`edu-${index}`} style={styles.item}>
-                <Text style={styles.itemTitle}>{edu.degree || ''}</Text>
-                <Text style={styles.itemSubtitle}>{edu.institution || ''}</Text>
-                <Text style={styles.itemDetails}>
-                  {edu.location && `${edu.location} • `}
-                  {edu.graduationDate && `Graduated: ${formatDate(edu.graduationDate)}`}
-                  {edu.gpa && ` • GPA: ${edu.gpa}`}
-                </Text>
-              </View>
-            ))}
-          </View>
-        )}
 
         {/* Skills */}
         {processedData.skills.length > 0 && (
