@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import { pdf } from '@react-pdf/renderer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, Eye, EyeOff } from 'lucide-react';
-import { ProfessionalResume } from '@/lib/resume/templates/professional';
+import { StableProfessionalResume } from '@/lib/resume/templates/stable-professional';
 import type { ResumeData } from '@/lib/resume/schema';
 
 interface ResumeTemplateProps {
@@ -20,6 +20,29 @@ export function ResumeTemplate({
   isLoading = false,
 }: ResumeTemplateProps) {
   const [showPreview, setShowPreview] = useState(true);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    try {
+      setIsDownloading(true);
+      const doc = <StableProfessionalResume data={data} />;
+      const asPdf = pdf(doc);
+      const blob = await asPdf.toBlob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${(data.personalInfo?.name || 'Resume').replace(/\s+/g, '_')}_Resume.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+  
 
   if (isLoading) {
     return (
@@ -52,40 +75,28 @@ export function ResumeTemplate({
             {showPreview ? 'Hide Preview' : 'Show Preview'}
           </Button>
 
-          <PDFDownloadLink
-            document={<ProfessionalResume data={data} />}
-            fileName={`${(data.personalInfo?.name || 'Resume').replace(/\s+/g, '_')}_Resume.pdf`}
+          <Button
+            onClick={handleDownload}
+            disabled={isDownloading}
+            className="flex items-center gap-2"
+            size="sm"
           >
-            {({ loading }) => (
-              <Button
-                disabled={loading}
-                className="flex items-center gap-2"
-                size="sm"
-              >
-                <Download className="size-4" />
-                {loading ? 'Preparing...' : 'Download PDF'}
-              </Button>
-            )}
-          </PDFDownloadLink>
+            <Download className="size-4" />
+            {isDownloading ? 'Preparing...' : 'Download PDF'}
+          </Button>
         </div>
       </div>
 
-      {/* Resume Preview */}
+      {/* Resume Preview - Temporarily disabled due to react-pdf reconciler issues */}
       {showPreview && (
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Resume Preview</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="w-full h-[600px] border rounded-b-lg overflow-hidden">
-              <PDFViewer
-                width="100%"
-                height="100%"
-                showToolbar={false}
-                className="border-0"
-              >
-                <ProfessionalResume data={data} />
-              </PDFViewer>
+          <CardContent className="p-8 text-center">
+            <div className="text-muted-foreground">
+              <p className="mb-4">PDF preview is temporarily disabled due to a technical issue.</p>
+              <p>You can still download the PDF using the button above.</p>
             </div>
           </CardContent>
         </Card>

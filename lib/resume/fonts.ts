@@ -1,7 +1,11 @@
 import { Font } from '@react-pdf/renderer';
 
+let fontsRegistered = false;
+
 // Use paths relative to the public directory for Turbopack compatibility
 export function registerFonts() {
+  if (fontsRegistered) return;
+  
   // Register Inter font family
   Font.register({
     family: 'Inter',
@@ -20,4 +24,6 @@ export function registerFonts() {
       },
     ],
   });
+  
+  fontsRegistered = true;
 }

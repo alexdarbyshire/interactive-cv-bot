@@ -12,7 +12,7 @@ import {
 import type { ResumeData } from '../schema';
 import { registerFonts } from '../fonts';
 
-// Register fonts for better typography
+// Register fonts at module load time
 registerFonts();
 
 const styles = StyleSheet.create({
@@ -177,6 +177,17 @@ interface ProfessionalResumeProps {
 }
 
 export function ProfessionalResume({ data }: ProfessionalResumeProps) {
+  // Defensive checks for data integrity
+  if (!data || !data.personalInfo) {
+    return (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <Text>Resume data not available</Text>
+        </Page>
+      </Document>
+    );
+  }
+
   const formatDate = (date: string) => {
     if (date === 'Present') return 'Present';
     if (!date) return '';
@@ -265,7 +276,7 @@ export function ProfessionalResume({ data }: ProfessionalResumeProps) {
         )}
 
         {/* Experience */}
-        {data.experience.length > 0 && (
+        {data.experience && data.experience.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Professional Experience</Text>
             {data.experience.map((exp, index) => (
@@ -296,7 +307,7 @@ export function ProfessionalResume({ data }: ProfessionalResumeProps) {
         )}
 
         {/* Education */}
-        {data.education.length > 0 && (
+        {data.education && data.education.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Education</Text>
             {data.education.map((edu, index) => (
@@ -316,7 +327,7 @@ export function ProfessionalResume({ data }: ProfessionalResumeProps) {
         )}
 
         {/* Skills */}
-        {data.skills.length > 0 && (
+        {data.skills && data.skills.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.skillsContainer}>
