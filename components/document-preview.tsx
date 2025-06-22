@@ -284,7 +284,21 @@ const DocumentContent = ({ document }: { document: Document }) => {
       ) : document.kind === 'resume' ? (
         <div className="p-4">
           <ResumeTemplate
-            data={JSON.parse(document.content ?? '{}') as ResumeData}
+            data={(() => {
+              try {
+                if (!document.content || document.content.trim() === '') {
+                  return {} as ResumeData;
+                }
+                const jsonMatch = document.content.match(/\{[\s\S]*\}/);
+                if (!jsonMatch) {
+                  return {} as ResumeData;
+                }
+                return JSON.parse(jsonMatch[0]) as ResumeData;
+              } catch (error) {
+                console.error('Failed to parse resume document content:', error);
+                return {} as ResumeData;
+              }
+            })()}
             title={document.title}
             isLoading={artifact.status === 'streaming'}
           />

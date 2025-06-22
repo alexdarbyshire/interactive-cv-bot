@@ -43,7 +43,14 @@ export async function fetchWithErrorHandlers(
 
 export function getLocalStorage(key: string) {
   if (typeof window !== 'undefined') {
-    return JSON.parse(localStorage.getItem(key) || '[]');
+    try {
+      const item = localStorage.getItem(key);
+      if (!item) return [];
+      return JSON.parse(item);
+    } catch (error) {
+      console.error('Failed to parse localStorage data:', error);
+      return [];
+    }
   }
   return [];
 }
