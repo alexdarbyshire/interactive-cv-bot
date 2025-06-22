@@ -42,7 +42,18 @@ export const resumeArtifact = new Artifact<'resume', ResumeArtifactMetadata>({
     let resumeData: ResumeData;
 
     try {
-      const parsedData = JSON.parse(content || '{}');
+      // Check if content is empty or not valid JSON
+      if (!content || content.trim() === '') {
+        throw new Error('Content is empty');
+      }
+      
+      // Try to find valid JSON in the content
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('No valid JSON found in content');
+      }
+      
+      const parsedData = JSON.parse(jsonMatch[0]);
       // Ensure we have a valid structure by merging with defaults
       resumeData = mergeWithDefaults(parsedData);
     } catch (error) {
