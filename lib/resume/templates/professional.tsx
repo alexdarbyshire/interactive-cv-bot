@@ -7,29 +7,13 @@ import {
   Text,
   View,
   StyleSheet,
-  Font,
   Link,
 } from '@react-pdf/renderer';
 import type { ResumeData } from '../schema';
+import { registerFonts } from '../fonts';
 
 // Register fonts for better typography
-Font.register({
-  family: 'Inter',
-  fonts: [
-    {
-      src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZhrib2Bg-4.woff2',
-      fontWeight: 400,
-    },
-    {
-      src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZhrib2Bg-4.woff2',
-      fontWeight: 600,
-    },
-    {
-      src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.woff2',
-      fontWeight: 700,
-    },
-  ],
-});
+registerFonts();
 
 const styles = StyleSheet.create({
   page: {
@@ -167,7 +151,8 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: '#6b7280',
     marginTop: 3,
-    fontStyle: 'italic',
+    // Removed italic style since we don't have an italic font variant registered
+    // fontStyle: 'italic',
   },
   certificationItem: {
     marginBottom: 8,
